@@ -1,15 +1,4 @@
-variable "org_service_url" {
-  description = "Azure DevOps Oragnization URL."
-  type        = string
-}
-
-variable "personal_access_token" {
-  description = "Azure DevOps PAT."
-  type        = string
-  sensitive   = true
-}
-
-variable "azr_devops_projects" {
+variable "projects" {
   type = map(object({
     name                 = string
     description          = string
@@ -22,5 +11,5 @@ variable "azr_devops_projects" {
     work_item_template   = optional(string)
     repos                = optional(list(string))
   }))
-  description = "Azure DevOps Projects"
+  description = "Projetos a serem criados"
 }

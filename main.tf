@@ -1,18 +1,19 @@
 terraform {
-  required_version = ">= 0.14.0"
-
+  required_version = ">= 0.15.0"
+  experiments      = [module_variable_optional_attrs]
   required_providers {
     azuredevops = {
       source  = "microsoft/azuredevops"
       version = "~> 0.1.4"
     }
-    template = {
-      source  = "hashicorp/template"
-      version = "~> 2.1.2"
-    }
+    # template = {
+    #   source  = "hashicorp/template"
+    #   version = "~> 2.1.2"
+    # }
   }
 
 }
+
 
 provider "azuredevops" {
   org_service_url       = var.org_service_url
@@ -20,17 +21,6 @@ provider "azuredevops" {
 }
 
 module "project" {
-  source = "./modules/project"
-
-  proj_name        = "DemoLab"
-  proj_description = "DemoLab Project for demonstration purposes."
-  proj_visibility  = "private"
-  proj_features = {
-    "boards"       = "enabled"
-    "repositories" = "enabled"
-    "pipelines"    = "enabled"
-    "testplans"    = "disabled"
-    "artifacts"    = "disabled"
-  }
-  proj_repos = ["teste1", "teste2"]
+  source   = "./projects"
+  projects = var.azr_devops_projects
 }

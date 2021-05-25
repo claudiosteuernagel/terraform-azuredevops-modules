@@ -3,7 +3,7 @@ resource "azuredevops_project" "proj" {
   name               = var.proj_name
   description        = var.proj_description
   visibility         = var.proj_visibility
-  version_control    = var.proj_vcs
+  version_control    = "Git"
   work_item_template = var.proj_wi_template
   features           = var.proj_features
 }
